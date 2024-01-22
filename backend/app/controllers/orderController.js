@@ -25,22 +25,21 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            // findCustomer by mail -> jeśli klient nie istnieje stwórz nowego, następnie stwórz nowe zamówienie, zatkualizuj klienta i zamówienie. Jezeli klient istnieje to zaktualizuj Pamiętaj szukamy po mailu
-            const findCustomer = await Customer.findOne({
+            let customer = await Customer.findOne({
                 email: req.body.email,
             });
 
-            if (!findCustomer) {
-                return res.status(400).json({
-                    message: "Brakujące dane. Proszę podać więcej informacji.",
-                });
+            if (!customer) {
+                customer = new Customer(req.body);
+                await customer.save();
             }
 
             const newOrder = new Order(req.body);
+            newOrder.customer = customer._id;
             const savedOrder = await newOrder.save();
 
             await Customer.updateOne(
-                { _id: savedOrder.customer },
+                { _id: customer._id },
                 { $push: { orders: savedOrder._id } }
             );
 
