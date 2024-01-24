@@ -14,7 +14,7 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                path: "/home",
+                path: "/",
                 element: <MainPage />,
                 loader: () => {
                     return fetch("http://localhost:4000/products");

@@ -4,6 +4,9 @@ export function MainMenu() {
     return (
         <ul className={styles.mainMenu}>
             <li>
+                <NavLink to={"/"}>Home</NavLink>
+            </li>
+            <li>
                 <NavLink to={"/rakiety"}>Rakiety</NavLink>
             </li>
             <li>

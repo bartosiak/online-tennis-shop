@@ -2,8 +2,12 @@ import styles from "./Details.module.css";
 
 import CAR_ICON from "../../assets/car.svg";
 import RETURN_ICON from "../../assets/return.svg";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function Details({ product }) {
+    const [, addProductToCart] = useContext(CartContext);
+
     return (
         <div className={styles.details}>
             <h2>{product.brand}</h2>
@@ -11,7 +15,13 @@ export function Details({ product }) {
             <p className={styles.price}>{product.price}zł</p>
             <p>{product.description}</p>
 
-            <button>Dodaj do koszyka</button>
+            <button
+                onClick={() => {
+                    addProductToCart(product);
+                }}
+            >
+                Dodaj do koszyka
+            </button>
 
             <ul className={styles.extraInfo}>
                 <li>
