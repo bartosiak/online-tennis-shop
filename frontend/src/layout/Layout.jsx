@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { Footer } from "../components/Footer/Footer";
 import { IconMenu } from "../components/IconMenu/IconMenu";
 import { Logo } from "../components/Logo/Logo";
@@ -5,7 +6,7 @@ import { MainContent } from "../components/MainContent/MainContent";
 import { MainMenu } from "../components/MainMenu/MainMenu";
 import { TopBar } from "../components/TopBar/TopBar";
 
-export function Layout({ children }) {
+export function Layout() {
     return (
         <>
             <MainContent>
@@ -14,7 +15,7 @@ export function Layout({ children }) {
                     <Logo />
                     <IconMenu />
                 </TopBar>
-                {children}
+                <Outlet />
             </MainContent>
             <Footer />
         </>
