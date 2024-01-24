@@ -1,0 +1,12 @@
+.name {
+    width: 40%;
+    text-align: left;
+}
+.image {
+    width: 80px;
+    height: 100px;
+}
+
+.total {
+    padding-right: 5rem;
+}

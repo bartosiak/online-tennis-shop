@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainPage } from "./views/MainPage/MainPage.jsx";
 import { ProductDetails } from "./views/ProductDetails/ProductDetails.jsx";
 import { Layout } from "./layout/Layout.jsx";
+import { Cart } from "./views/Cart/Cart.jsx";
 
 const router = createBrowserRouter([
     {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                path: "/",
+                path: "/home",
                 element: <MainPage />,
                 loader: () => {
                     return fetch("http://localhost:4000/products");
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
                 loader: ({ params }) => {
                     return fetch(`http://localhost:4000/products/${params.id}`);
                 },
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
             },
         ],
     },

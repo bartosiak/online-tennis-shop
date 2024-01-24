@@ -1,0 +1,52 @@
+.wrapper {
+    margin-inline: auto;
+    background-color: #f8f6f6;
+}
+.table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.tableHead {
+    padding-right: 5rem;
+}
+
+.holder {
+    background-color: #f8f6f6;
+    padding: 1rem;
+    border: 1px solid rgb(179, 179, 179);
+}
+.product {
+    border-top: 1px solid rgb(179, 179, 179);
+}
+
+td {
+    border-top: 1px solid rgb(179, 179, 179);
+    text-align: right;
+}
+
+caption,
+th,
+td {
+    padding: 1rem;
+}
+
+th {
+    text-align: right;
+}
+
+caption {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+th:nth-child(4) {
+    width: 18%;
+}
+th:last-child {
+    padding-right: 5rem;
+    width: 18%;
+}
