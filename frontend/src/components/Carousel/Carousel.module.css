@@ -1,0 +1,44 @@
+.container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 500px;
+    background-size: cover;
+}
+
+.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(225, 165, 37, 0.5);
+    border: none;
+    padding: 10px;
+    height: 10vh;
+    color: white;
+}
+
+.btnPrev {
+    left: 1px;
+}
+
+.btnNext {
+    right: 1px;
+}
+
+.indicators {
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+}
