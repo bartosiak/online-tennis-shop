@@ -4,6 +4,7 @@ import CAR_ICON from "../../assets/car.svg";
 import RETURN_ICON from "../../assets/return.svg";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { Button } from "../Button/Button";
 
 export function Details({ product }) {
     const [, addProductToCart] = useContext(CartContext);
@@ -15,13 +16,13 @@ export function Details({ product }) {
             <p className={styles.price}>{product.price}zł</p>
             <p>{product.description}</p>
 
-            <button
+            <Button
                 onClick={() => {
                     addProductToCart(product);
                 }}
             >
                 Dodaj do koszyka
-            </button>
+            </Button>
 
             <ul className={styles.extraInfo}>
                 <li>

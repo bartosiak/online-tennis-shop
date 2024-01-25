@@ -1,3 +1,7 @@
+.container {
+    margin-bottom: 3rem;
+    width: 100%;
+}
 .wrapper {
     margin-inline: auto;
     background-color: #f8f6f6;
@@ -34,8 +38,7 @@ td {
 th {
     text-align: right;
 }
-
-caption {
+.content caption {
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;

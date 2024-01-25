@@ -22,11 +22,11 @@ const router = createBrowserRouter([
                 },
             },
             {
-                path: "/products/:category",
+                path: "/products/category/:category",
                 element: <ProductList />,
                 loader: ({ params }) => {
                     return fetch(
-                        `http://localhost:4000/products/${params.category}`
+                        `http://localhost:4000/products/category/${params.category}`
                     );
                 },
             },

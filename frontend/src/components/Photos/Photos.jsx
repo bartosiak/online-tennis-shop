@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export function Photos({ product }) {
     const [currentPhoto, setCurrentPhoto] = useState(product.imagesUrl[0]);
-
     return (
         <FlexContainer>
             <div className={styles.thumbnails}>
