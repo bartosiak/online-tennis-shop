@@ -3,6 +3,15 @@ import { CenteredContent } from "../CenteredContent/CenteredContent";
 import styles from "./CartProductList.module.css";
 
 export function CartProductList({ products }) {
+    const deliveryCost = 49;
+    const minSumForFreeDelivery = 500;
+
+    let sum = 0;
+    products.forEach((product) => {
+        sum += product.price * product.quantity;
+    });
+
+    const totalCost = sum > minSumForFreeDelivery ? sum : sum + deliveryCost;
     return (
         <CenteredContent>
             <div className={styles.wrapper}>
@@ -25,6 +34,15 @@ export function CartProductList({ products }) {
                                     product={product}
                                 />
                             ))}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Suma:</td>
+                                <td className={styles.totalCost}>
+                                    {totalCost}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

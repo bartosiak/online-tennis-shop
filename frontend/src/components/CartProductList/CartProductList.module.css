@@ -50,3 +50,7 @@ th:last-child {
     padding-right: 5rem;
     width: 18%;
 }
+
+.totalCost {
+    padding-right: 5rem;
+}
