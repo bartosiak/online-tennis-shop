@@ -17,9 +17,23 @@ export function Layout() {
 
     function addProductToCart(product) {
         setCartItems((previousCartItems) => {
-            const newState = [...previousCartItems, product];
-            localStorage["cart_products"] = JSON.stringify(newState);
-            return newState;
+            const existingProduct = previousCartItems.find(
+                (item) => item._id === product._id
+            );
+            if (existingProduct) {
+                return previousCartItems.map((item) =>
+                    item._id === product._id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
+            } else {
+                const newState = [
+                    ...previousCartItems,
+                    { ...product, quantity: 1 },
+                ];
+                localStorage["cart_products"] = JSON.stringify(newState);
+                return newState;
+            }
         });
     }
     return (

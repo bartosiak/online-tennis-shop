@@ -1,4 +1,4 @@
-import { CardProduct } from "../CardProduct/CardProduct";
+import { CartProduct } from "../CartProduct/CartProduct";
 import { CenteredContent } from "../CenteredContent/CenteredContent";
 import styles from "./CartProductList.module.css";
 
@@ -20,7 +20,7 @@ export function CartProductList({ products }) {
                         </thead>
                         <tbody>
                             {products.map((product) => (
-                                <CardProduct
+                                <CartProduct
                                     key={product._id}
                                     product={product}
                                 />
