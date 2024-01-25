@@ -7,6 +7,7 @@ import { MainPage } from "./views/MainPage/MainPage.jsx";
 import { ProductDetails } from "./views/ProductDetails/ProductDetails.jsx";
 import { Layout } from "./layout/Layout.jsx";
 import { Cart } from "./views/Cart/Cart.jsx";
+import { ProductList } from "./views/ProductList/ProductList.jsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,15 @@ const router = createBrowserRouter([
                 element: <MainPage />,
                 loader: () => {
                     return fetch("http://localhost:4000/products");
+                },
+            },
+            {
+                path: "/products/:category",
+                element: <ProductList />,
+                loader: ({ params }) => {
+                    return fetch(
+                        `http://localhost:4000/products/${params.category}`
+                    );
                 },
             },
             {

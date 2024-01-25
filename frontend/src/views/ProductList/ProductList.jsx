@@ -1,13 +1,12 @@
 import { useLoaderData } from "react-router-dom";
-import { Hero } from "../../components/Hero/Hero";
+import { CenteredContent } from "../../components/CenteredContent/CenteredContent";
 import { Products } from "../../components/Products/Product";
 
-export function MainPage() {
+export function ProductList() {
     const products = useLoaderData();
     return (
-        <>
-            <Hero />
+        <CenteredContent>
             <Products products={products} />
-        </>
+        </CenteredContent>
     );
 }
