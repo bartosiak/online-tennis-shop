@@ -12,6 +12,21 @@ module.exports = {
         }
     },
 
+    category: async (req, res, next) => {
+        try {
+            const categoryFromUrl = req.params.category;
+            const formattedCategory =
+                categoryFromUrl.charAt(0).toUpperCase() +
+                categoryFromUrl.slice(1).toLowerCase();
+            const products = await Product.find({
+                category: formattedCategory,
+            });
+            return res.status(200).json(products);
+        } catch (err) {
+            return next(err);
+        }
+    },
+
     showProduct: async (req, res, next) => {
         try {
             const product = await Product.findById(req.params.id);
@@ -26,7 +41,7 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            const images = fs.readdirSync(path.join(__dirname, "../public"));
+            const images = fs.readdirSync(path.join(__dirname, "../../public"));
 
             const randomImage =
                 images[Math.floor(Math.random() * images.length)];
