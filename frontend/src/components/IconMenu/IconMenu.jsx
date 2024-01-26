@@ -2,9 +2,12 @@ import styles from "./IconMenu.module.css";
 import { Link } from "react-router-dom";
 import BAG_ICON from "../../assets/bag.svg";
 import HEART from "../../assets/heart.svg";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function IconMenu() {
-    const cartItems = 2;
+    const [cartItems] = useContext(CartContext);
+
     return (
         <div>
             <ul className={styles.iconMenu}>
@@ -17,7 +20,7 @@ export function IconMenu() {
                     <Link to="/cart">
                         <img src={BAG_ICON} alt="" />
                         <div className={styles.numberOfProducts}>
-                            {cartItems}
+                            {cartItems.length}
                         </div>
                     </Link>
                 </li>

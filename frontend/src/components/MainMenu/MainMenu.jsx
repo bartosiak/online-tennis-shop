@@ -7,10 +7,10 @@ export function MainMenu() {
                 <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>
-                <NavLink to={"/products/category/Rakiety"}>Rakiety</NavLink>
+                <NavLink to={"/products/category/rakiety"}>Rakiety</NavLink>
             </li>
             <li>
-                <NavLink to={"/products/category/Obuwie"}>Obuwie</NavLink>
+                <NavLink to={"/products/category/obuwie"}>Obuwie</NavLink>
             </li>
         </ul>
     );

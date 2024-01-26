@@ -22,7 +22,6 @@ const CustomerSchema = new Schema(
         },
         password: {
             type: String,
-            required: true,
         },
         orders: [
             {

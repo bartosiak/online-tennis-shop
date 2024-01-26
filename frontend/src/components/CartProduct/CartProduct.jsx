@@ -8,7 +8,7 @@ export function CartProduct({ product }) {
             <td className={styles.brand}>{product.brand}</td>
             <td className={styles.quanty}>{product.quantity}</td>
             <td className={styles.price}>{product.price}</td>
-            <td className={styles.total}>{product.price}</td>
+            <td className={styles.total}>{product.price * product.quantity}</td>
         </tr>
     );
 }
