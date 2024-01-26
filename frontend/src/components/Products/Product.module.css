@@ -1,9 +1,12 @@
-.productListHeader {
+.productHeader {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
 .productsWrapper {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100rem;
+    gap: 1rem;
 }
