@@ -23,12 +23,14 @@ app.use(cors());
 const productRouter = require("./app/router/productRouter");
 const orderRouter = require("./app/router/orderRouter");
 const customerRouter = require("./app/router/customerRouter");
+const userRouter = require("./app/router/userRouter");
 
 const errorHandler = require("./app/middleware/errorHandler");
 
 app.use("/products", productRouter);
 app.use("/order", orderRouter);
 app.use("/customer", customerRouter);
+app.use("/user", userRouter);
 app.use(errorHandler);
 
 app.listen(config.app.port, () => {
