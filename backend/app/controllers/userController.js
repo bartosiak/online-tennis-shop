@@ -1,25 +1,34 @@
 const User = require("../models/UserModel");
 const Customer = require("../models/CustomerModel");
+const bcrypt = require("bcrypt");
+const generateError = require("../helpers/generateErrorHelper");
 
 module.exports = {
-    index: async (req, res, next) => {
-        try {
-            const users = await User.find();
-            return res.status(200).json(users);
-        } catch (err) {
-            return next(err);
+    login: async (req, res) => {
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(404).json(generateError("User not found"));
         }
-    },
-
-    showUser: async (req, res, next) => {
         try {
-            const user = await User.findById(req.params.id);
-            if (!user) {
-                return next({ status: 404, message: "User not found" });
-            }
-            return res.json(user);
-        } catch (err) {
-            return next(err);
+            bcrypt.compare(req.body.password, user.password, (err, logged) => {
+                if (err) {
+                    res.status(400).json(generateError("Login error"));
+                    return;
+                }
+
+                if (logged) {
+                    const token = user.generateAuthToken(user);
+                    res.cookie("token", token);
+                    res.status(200).json({ user: user, jwt: token });
+                } else {
+                    res.status(400).json(
+                        generateError("Login data do not match")
+                    );
+                    return;
+                }
+            });
+        } catch (error) {
+            res.status(500).json(generateError(error.message));
         }
     },
 
@@ -53,34 +62,6 @@ module.exports = {
             if (err.name === "ValidationError") {
                 return res.status(400).json({ message: err.message });
             }
-            return next(err);
-        }
-    },
-
-    update: async (req, res, next) => {
-        try {
-            const updatedUser = await User.findByIdAndUpdate(
-                req.params.id,
-                req.body,
-                { new: true }
-            );
-            if (!updatedUser) {
-                return next({ status: 404, message: "User not found" });
-            }
-            return res.json(updatedUser);
-        } catch (err) {
-            return next(err);
-        }
-    },
-
-    delete: async (req, res, next) => {
-        try {
-            const user = await User.findByIdAndDelete(req.params.id);
-            if (!user) {
-                return next({ status: 404, message: "User not found" });
-            }
-            return res.json({ message: "User deleted" });
-        } catch (err) {
             return next(err);
         }
     },

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/productController");
-const verifyAdminRole = require("../middleware/verifyAdminRole");
+const authApiMiddleware = require("../middleware/authApiMiddleware.js");
 
 router.get("/", ProductController.index);
 
@@ -9,10 +9,10 @@ router.get("/category/:category", ProductController.category);
 
 router.get("/:id", ProductController.showProduct);
 
-router.post("/", verifyAdminRole, ProductController.create);
+router.post("/", authApiMiddleware, ProductController.create);
 
-router.put("/:id", verifyAdminRole, ProductController.update);
+router.put("/:id", authApiMiddleware, ProductController.update);
 
-router.delete("/:id", verifyAdminRole, ProductController.delete);
+router.delete("/:id", authApiMiddleware, ProductController.delete);
 
 module.exports = router;
