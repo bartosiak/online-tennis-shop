@@ -20,15 +20,16 @@ const CustomerSchema = new Schema(
             required: true,
             unique: true,
         },
-        password: {
-            type: String,
-        },
         orders: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Order",
             },
         ],
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
     },
     { timestamps: true }
 );

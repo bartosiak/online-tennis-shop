@@ -34,19 +34,23 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            let customer = await Customer.findOne({ email: req.body.email });
-
-            if (!customer) {
-                const newCustomer = new Customer(req.body);
-                customer = await newCustomer.save();
-            }
-
             const existingUser = await User.findOne({ email: req.body.email });
 
             if (existingUser) {
                 return res
                     .status(400)
                     .json({ message: "User with this email already exists." });
+            }
+
+            let customer = await Customer.findOne({ email: req.body.email });
+
+            if (!customer) {
+                const newCustomer = new Customer({
+                    name: req.body.name,
+                    address: req.body.address,
+                    email: req.body.email,
+                });
+                customer = await newCustomer.save();
             }
 
             const newUser = new User({
@@ -57,6 +61,8 @@ module.exports = {
             });
             const savedUser = await newUser.save();
 
+            customer.user = newUser._id;
+            customer.save();
             return res.status(201).json(savedUser);
         } catch (err) {
             if (err.name === "ValidationError") {

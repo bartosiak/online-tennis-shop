@@ -3,26 +3,29 @@ const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const UserSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
+const UserSchema = new Schema(
+    {
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        role: {
+            type: String,
+            enum: ["admin", "customer"],
+            required: true,
+        },
+        customer: {
+            type: Schema.Types.ObjectId,
+            ref: "Customer",
+        },
     },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        enum: ["admin", "customer"],
-        required: true,
-    },
-    customer: {
-        type: Schema.Types.ObjectId,
-        ref: "Customer",
-    },
-});
+    { timestamps: true }
+);
 UserSchema.pre("save", function (next) {
     const user = this;
 
