@@ -1,4 +1,10 @@
 import styles from "./CenteredContent.module.css";
-export function CenteredContent({ children }) {
-    return <div className={styles.wrapper}>{children}</div>;
+export function CenteredContent({ children, width }) {
+    const widthClass = `width-${width}`;
+    console.log(widthClass);
+    return (
+        <div className={`${styles.wrapper} ${styles[widthClass]}`}>
+            {children}
+        </div>
+    );
 }

@@ -10,6 +10,7 @@ import { Cart } from "./views/Cart/Cart.jsx";
 import { ProductList } from "./views/ProductList/ProductList.jsx";
 import { createOrder } from "./components/OrderDetailsForm/OrderDetailsForm.jsx";
 import { OrderDetails } from "./views/OrderDetails/OrderDetails.jsx";
+import { RegistrationPage } from "./views/RegistrationPage/RegistrationPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -44,9 +45,13 @@ const router = createBrowserRouter([
                 element: <Cart />,
             },
             {
-                path: "/orderDetails",
+                path: "/order-details",
                 action: createOrder,
                 element: <OrderDetails />,
+            },
+            {
+                path: "/registration",
+                element: <RegistrationPage />,
             },
         ],
     },
