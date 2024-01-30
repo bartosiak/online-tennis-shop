@@ -4,8 +4,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { Button } from "../Button/Button";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
+    const navigate = useNavigate();
     const schema = z.object({
         email: z.string().email(),
         password: z.string().min(4),
@@ -17,16 +21,22 @@ export function LoginForm() {
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
-            email: "test@email.com",
+            email: "admin@gmail.com",
         },
         resolver: zodResolver(schema),
     });
 
     const onSubmit = async (data) => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            console.log(data);
+            const response = await axios.post(
+                "http://localhost:4000/user/login",
+                data
+            );
+            Cookies.set("jwt", response.data.jwt, { expires: 1 / 24 });
+
+            navigate("/");
         } catch (error) {
+            console.log(error);
             setError("root", {
                 message: "This email is already taken",
             });

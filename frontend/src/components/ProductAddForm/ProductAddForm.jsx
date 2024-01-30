@@ -1,4 +1,4 @@
-import styles from "./RegistrationForm.module.css";
+import styles from "./ProductAddForm.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -6,17 +6,15 @@ import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { Button } from "../Button/Button";
 import axios from "axios";
 
-export function RegistrationForm() {
+export function ProductAddForm() {
     const schema = z.object({
         name: z.string().min(1),
-        address: z.object({
-            street: z.string().min(2),
-            zipCode: z.string().min(5),
-            city: z.string().min(2),
-        }),
-        email: z.string().email(),
-        password: z.string().min(4),
-        role: z.string().min(5),
+        price: z.number().min(1),
+        description: z.string(),
+        category: z.string().min(1),
+        brand: z.string(),
+        stockQuantity: z.number().min(1),
+        imagesUrl: z.array(z.string().url()),
     });
 
     const {
@@ -25,80 +23,77 @@ export function RegistrationForm() {
         setError,
         formState: { errors, isSubmitting },
     } = useForm({
-        defaultValues: {
-            email: "admin@gmail.com",
-        },
         resolver: zodResolver(schema),
     });
 
     const onSubmit = async (data) => {
         try {
             const response = await axios.post(
-                "http://localhost:4000/user",
+                "http://localhost:4000/product", // Zmieniłem endpoint na /product
                 data
             );
 
             console.log(response);
-            console.log("registration successfully completed");
+            console.log("Product successfully added");
         } catch (error) {
             setError("root", {
-                message: "This email is already taken",
+                message: "There was an error adding the product",
             });
         }
     };
 
     return (
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={styles.header}>Rejestracja</h2>
+            <h2 className={styles.header}>Dodaj Produkt</h2>
             <input
                 className={styles.input}
                 {...register("name")}
                 type="text"
-                placeholder="Imię"
+                placeholder="Nazwa produktu"
             />
             <ErrorMessage error={errors.name} />
             <input
                 className={styles.input}
-                {...register("address.street")}
-                type="street"
-                placeholder="ulica"
+                {...register("price")}
+                type="number"
+                placeholder="Cena"
             />
-            <ErrorMessage error={errors.address?.street} />
+            <ErrorMessage error={errors.price} />
             <input
                 className={styles.input}
-                {...register("address.zipCode")}
+                {...register("category")}
                 type="text"
-                placeholder="Kod pocztowy"
+                placeholder="Kategoria"
             />
-            <ErrorMessage error={errors.address?.zipCode} />
+            <ErrorMessage error={errors.category} />
             <input
                 className={styles.input}
-                {...register("address.city")}
+                {...register("brand")}
                 type="text"
-                placeholder="Miasto"
+                placeholder="Marka"
             />
-            <ErrorMessage error={errors.address?.city} />
+            <ErrorMessage error={errors.brand} />
             <input
                 className={styles.input}
-                {...register("email")}
+                {...register("stockQuantity")}
+                type="number"
+                placeholder="Ilość w magazynie"
+            />
+            <ErrorMessage error={errors.stockQuantity} />
+            <input
+                className={styles.input}
+                {...register("imagesUrl")}
                 type="text"
-                placeholder="Email"
+                placeholder="URL obrazu"
             />
-            <ErrorMessage error={errors.email} />
-            <input
-                className={styles.input}
-                {...register("password")}
-                type="password"
-                placeholder="Password"
+            <ErrorMessage error={errors.imagesUrl} />
+            <textarea
+                className={`${styles.input} ${styles.textarea}`}
+                {...register("description")}
+                type="text"
+                placeholder="Opis"
             />
-            <ErrorMessage error={errors.password} />
-            <input
-                className={styles.input}
-                {...register("role")}
-                type="role"
-                placeholder="Admin lub Customer"
-            />
-            <ErrorMessage error={errors.role} />
+            <ErrorMessage error={errors.description} />
 
             <Button disabled={isSubmitting} type="submit">
                 {isSubmitting ? "Loading..." : "Submit"}
