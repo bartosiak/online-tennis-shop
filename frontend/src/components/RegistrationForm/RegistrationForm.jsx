@@ -1,4 +1,4 @@
-import styles from "./Registration.module.css";
+import styles from "./RegistrationForm.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,21 +40,43 @@ export function RegistrationForm() {
     return (
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={styles.header}>Rejestracja</h2>
-            <input {...register("name")} type="text" placeholder="Imię" />
+            <input
+                className={styles.input}
+                {...register("name")}
+                type="text"
+                placeholder="Imię"
+            />
             <ErrorMessage error={errors.name} />
-            <input {...register("street")} type="street" placeholder="ulica" />
+            <input
+                className={styles.input}
+                {...register("street")}
+                type="street"
+                placeholder="ulica"
+            />
             <ErrorMessage error={errors.street} />
             <input
+                className={styles.input}
                 {...register("zipCode")}
                 type="text"
                 placeholder="Kod pocztowy"
             />
             <ErrorMessage error={errors.zipCode} />
-            <input {...register("city")} type="text" placeholder="Miasto" />
+            <input
+                className={styles.input}
+                {...register("city")}
+                type="text"
+                placeholder="Miasto"
+            />
             <ErrorMessage error={errors.city} />
-            <input {...register("email")} type="text" placeholder="Email" />
+            <input
+                className={styles.input}
+                {...register("email")}
+                type="text"
+                placeholder="Email"
+            />
             <ErrorMessage error={errors.email} />
             <input
+                className={styles.input}
                 {...register("password")}
                 type="password"
                 placeholder="Password"

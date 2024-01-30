@@ -1,11 +1,15 @@
 label {
     display: block;
-    margin: 1rem 0;
+    margin: 0 1rem;
+}
+
+.radio {
+    display: flex;
+    justify-content: flex-start;
 }
 
 input {
     padding: 0.2rem;
-    margin-left: 0.5rem;
 }
 
 .container {

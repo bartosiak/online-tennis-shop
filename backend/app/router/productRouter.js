@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductController = require("../controllers/productController");
 const authApiMiddleware = require("../middleware/authApiMiddleware.js");
 
-router.get("/", authApiMiddleware, ProductController.index);
+router.get("/", ProductController.index);
 
 router.get("/category/:category", ProductController.category);
 

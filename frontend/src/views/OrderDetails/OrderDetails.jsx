@@ -1,10 +1,11 @@
-import { CenteredContent } from "../../components/CenteredContent/CenteredContent";
+// import { CenteredContent } from "../../components/CenteredContent/CenteredContent";
+import { FlexContainer } from "../../components/FlexContainer/FlexContainer";
 import { OrderDetailsForm } from "../../components/OrderDetailsForm/OrderDetailsForm";
 
 export function OrderDetails() {
     return (
-        <CenteredContent>
+        <FlexContainer>
             <OrderDetailsForm />
-        </CenteredContent>
+        </FlexContainer>
     );
 }

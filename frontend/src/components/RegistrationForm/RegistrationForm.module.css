@@ -1,0 +1,25 @@
+button:disabled {
+    cursor: not-allowed;
+}
+
+.header {
+    margin-bottom: 1.3rem;
+    display: block;
+    text-align: center;
+}
+.container {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 1px solid skyblue;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 25rem;
+}
+.input {
+    margin: 0.4rem 0;
+    height: 1.5rem;
+    padding: 1rem;
+    width: 100%;
+}

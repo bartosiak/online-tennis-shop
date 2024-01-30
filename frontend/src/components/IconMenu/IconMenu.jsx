@@ -12,6 +12,12 @@ export function IconMenu() {
         <div>
             <ul className={styles.iconMenu}>
                 <li>
+                    <Link to="/registration">Rejestracja</Link>
+                </li>
+                <li>
+                    <Link to="/login">Zaloguj</Link>
+                </li>
+                <li>
                     <Link to="/favorite">
                         <img src={HEART} alt="" />
                     </Link>

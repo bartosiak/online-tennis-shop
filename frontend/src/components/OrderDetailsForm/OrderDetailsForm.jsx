@@ -1,3 +1,4 @@
+import { Button } from "../Button/Button";
 import styles from "./OrderDetailsForm.module.css";
 import { Form } from "react-router-dom";
 
@@ -32,20 +33,27 @@ export function OrderDetailsForm() {
     return (
         <Form className={styles.container} method="POST" action="/orderDetails">
             <label>
-                Jestem:
-                <input
-                    type="radio"
-                    name="customerType"
-                    value="Klient indywidualny"
-                    required
-                />
-                Klient indywidualny
-                <input type="radio" name="customerType" value="Firma" /> Firma
+                Wybierz:
+                <div className={styles.radio}>
+                    <input
+                        type="radio"
+                        name="customerType"
+                        value="Klient indywidualny"
+                        required
+                    />
+                    Klient indywidualny
+                </div>
+                <div className={styles.radio}>
+                    <input type="radio" name="customerType" value="Firma" />{" "}
+                    Firma
+                </div>
             </label>
+
             <label>
                 Imię i Nazwisko:
                 <input type="text" name="name" pattern="[A-Za-z]+" required />
             </label>
+
             <label>
                 Email:
                 <input
@@ -82,7 +90,7 @@ export function OrderDetailsForm() {
                 Miasto:
                 <input type="text" name="city" />
             </label>
-            <button type="submit">Wyślij</button>
+            <Button type="submit">Wyślij</Button>
         </Form>
     );
 }

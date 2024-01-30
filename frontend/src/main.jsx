@@ -11,6 +11,7 @@ import { ProductList } from "./views/ProductList/ProductList.jsx";
 import { createOrder } from "./components/OrderDetailsForm/OrderDetailsForm.jsx";
 import { OrderDetails } from "./views/OrderDetails/OrderDetails.jsx";
 import { RegistrationPage } from "./views/RegistrationPage/RegistrationPage.jsx";
+import { Login } from "./views/Login/Login.jsx";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: "/registration",
                 element: <RegistrationPage />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
             },
         ],
     },
