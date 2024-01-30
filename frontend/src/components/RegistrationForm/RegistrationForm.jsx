@@ -4,16 +4,21 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { Button } from "../Button/Button";
+import axios from "axios";
 
 export function RegistrationForm() {
     const schema = z.object({
         name: z.string().min(1),
-        street: z.string().min(2),
-        zipCode: z.string().min(5),
-        city: z.string().min(2),
+        address: z.object({
+            street: z.string().min(2),
+            zipCode: z.string().min(5),
+            city: z.string().min(2),
+        }),
         email: z.string().email(),
         password: z.string().min(4),
+        role: z.string().min(5),
     });
+
     const {
         register,
         handleSubmit,
@@ -28,8 +33,13 @@ export function RegistrationForm() {
 
     const onSubmit = async (data) => {
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            console.log(data);
+            const response = await axios.post(
+                "http://localhost:4000/user",
+                data
+            );
+
+            console.log(response);
+            console.log("registration successfully completed");
         } catch (error) {
             setError("root", {
                 message: "This email is already taken",
@@ -49,25 +59,25 @@ export function RegistrationForm() {
             <ErrorMessage error={errors.name} />
             <input
                 className={styles.input}
-                {...register("street")}
+                {...register("address.street")}
                 type="street"
                 placeholder="ulica"
             />
-            <ErrorMessage error={errors.street} />
+            <ErrorMessage error={errors.address?.street} />
             <input
                 className={styles.input}
-                {...register("zipCode")}
+                {...register("address.zipCode")}
                 type="text"
                 placeholder="Kod pocztowy"
             />
-            <ErrorMessage error={errors.zipCode} />
+            <ErrorMessage error={errors.address?.zipCode} />
             <input
                 className={styles.input}
-                {...register("city")}
+                {...register("address.city")}
                 type="text"
                 placeholder="Miasto"
             />
-            <ErrorMessage error={errors.city} />
+            <ErrorMessage error={errors.address?.city} />
             <input
                 className={styles.input}
                 {...register("email")}
@@ -82,6 +92,13 @@ export function RegistrationForm() {
                 placeholder="Password"
             />
             <ErrorMessage error={errors.password} />
+            <input
+                className={styles.input}
+                {...register("role")}
+                type="role"
+                placeholder="Admin lub Customer"
+            />
+            <ErrorMessage error={errors.role} />
 
             <Button disabled={isSubmitting} type="submit">
                 {isSubmitting ? "Loading..." : "Submit"}
