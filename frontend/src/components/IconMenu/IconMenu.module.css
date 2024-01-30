@@ -4,8 +4,59 @@
     padding: 1rem;
 }
 
+.user {
+    width: 1.6rem;
+    border: none;
+}
+
+.accordionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.accordionIcon {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    justify-content: flex-end;
+}
+
+.accordion {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #efecec;
+    z-index: 1;
+    padding: 1.5rem;
+    border-radius: 0.6rem;
+}
+
+.iconMenu {
+    position: relative;
+}
+
 .iconMenu li {
     position: relative;
+}
+
+.btnLogin {
+    padding: 3rem;
+    color: white;
+}
+
+.registration {
+    padding: 1rem;
+}
+
+.addProduct {
+    border-top: 1px solid rgb(203, 203, 203);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.registration span {
+    color: var(--color-theme-main);
 }
 
 .numberOfProducts {
