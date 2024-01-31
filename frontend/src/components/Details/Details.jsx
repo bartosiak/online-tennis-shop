@@ -25,7 +25,7 @@ export function Details({ product }) {
                 Dodaj do koszyka
             </Button>
             <Button>
-                <Link to={`/edit-product/${product._id}`}>Edytuj</Link>
+                <Link className={styles.btnEdit} to={`/edit-product/${product._id}`}>Edytuj</Link>
             </Button>
             <ul className={styles.extraInfo}>
                 <li>

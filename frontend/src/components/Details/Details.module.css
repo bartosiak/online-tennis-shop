@@ -1,5 +1,5 @@
 .details {
-    width: 100%;
+    width: 20%;
     padding-right: 1rem;
 }
 
@@ -24,4 +24,8 @@
     justify-content: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+.btnEdit {
+    color: white;
 }

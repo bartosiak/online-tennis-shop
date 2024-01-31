@@ -1,11 +1,10 @@
 import styles from "./Photos.module.css";
-import { FlexContainer } from "../FlexContainer/FlexContainer";
 import { useState } from "react";
 
 export function Photos({ product }) {
     const [currentPhoto, setCurrentPhoto] = useState(product.imagesUrl[0]);
     return (
-        <FlexContainer>
+        <div className={styles.photoContainer}>
             <div className={styles.thumbnails}>
                 {product.imagesUrl.map((photo) => {
                     return (
@@ -23,6 +22,6 @@ export function Photos({ product }) {
                 })}
             </div>
             <img className={styles.mainPhoto} src={currentPhoto} />
-        </FlexContainer>
+        </div>
     );
 }
