@@ -30,6 +30,7 @@ module.exports = {
     showProduct: async (req, res, next) => {
         try {
             const product = await Product.findById(req.params.id);
+            console.log(product);
             if (!product) {
                 return next({ status: 404, message: "Product not found" });
             }

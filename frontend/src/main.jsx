@@ -13,6 +13,7 @@ import { OrderDetails } from "./views/OrderDetails/OrderDetails.jsx";
 import { RegistrationPage } from "./views/RegistrationPage/RegistrationPage.jsx";
 import { Login } from "./views/Login/Login.jsx";
 import { ProductAddPage } from "./views/ProductAddPage/ProductAddPage.jsx";
+import { ProductEditPage } from "./views/ProductEditPage/ProductEditPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             {
                 path: "/add-product",
                 element: <ProductAddPage />,
+            },
+            {
+                path: "/edit-product/:id",
+                element: <ProductEditPage />,
             },
         ],
     },
