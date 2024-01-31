@@ -14,6 +14,7 @@ import { RegistrationPage } from "./views/RegistrationPage/RegistrationPage.jsx"
 import { Login } from "./views/Login/Login.jsx";
 import { ProductAddPage } from "./views/ProductAddPage/ProductAddPage.jsx";
 import { ProductEditPage } from "./views/ProductEditPage/ProductEditPage.jsx";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
     {
@@ -62,11 +63,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "/add-product",
-                element: <ProductAddPage />,
+                element: (
+                    <PrivateRoute>
+                        <ProductAddPage />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/edit-product/:id",
-                element: <ProductEditPage />,
+                element: (
+                    <PrivateRoute>
+                        <ProductEditPage />
+                    </PrivateRoute>
+                ),
             },
         ],
     },

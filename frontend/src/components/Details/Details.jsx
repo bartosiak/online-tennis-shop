@@ -5,6 +5,7 @@ import RETURN_ICON from "../../assets/return.svg";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { Button } from "../Button/Button";
+import { Link } from "react-router-dom";
 
 export function Details({ product }) {
     const [, addProductToCart] = useContext(CartContext);
@@ -23,7 +24,9 @@ export function Details({ product }) {
             >
                 Dodaj do koszyka
             </Button>
-
+            <Button>
+                <Link to={`/edit-product/${product._id}`}>Edytuj</Link>
+            </Button>
             <ul className={styles.extraInfo}>
                 <li>
                     <img src={CAR_ICON} />
