@@ -2,15 +2,20 @@ const Image = require("../models/ImageModel");
 
 module.exports = {
     create: async (req, res, next) => {
-        const newImage = new Image({
-            imagePath: "/uploads/" + req.file.originalname,
-        });
+        if (req.file) {
+            const newImage = new Image({
+                imagePath: "/uploads/" + req.file.originalname,
+            });
+            console.log(newImage);
 
-        try {
-            const image = await newImage.save();
-            res.status(201).json(image);
-        } catch (err) {
-            res.status(400).send(err);
+            try {
+                const image = await newImage.save();
+                res.status(201).json(image);
+            } catch (err) {
+                console.log("TO jest błąd po stronie backendu");
+                console.error(err);
+                res.status(400).send(err);
+            }
         }
     },
     showImages: async (req, res, next) => {

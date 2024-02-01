@@ -5,21 +5,24 @@ import { z } from "zod";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { Button } from "../Button/Button";
 import axios from "axios";
+import { useState } from "react";
 
 export function ProductAddForm() {
+    const [, setFile] = useState(null);
     const schema = z.object({
         name: z.string().min(1),
-        price: z.number().min(1),
+        price: z.string().min(1),
         description: z.string(),
         category: z.string().min(1),
         brand: z.string(),
-        stockQuantity: z.number().min(1),
-        imagesUrl: z.array(z.string().url()),
+        stockQuantity: z.string().min(1),
+        imagesUrl: z.string().url(),
     });
 
     const {
         register,
         handleSubmit,
+        setValue,
         setError,
         formState: { errors, isSubmitting },
     } = useForm({
@@ -39,6 +42,32 @@ export function ProductAddForm() {
             setError("root", {
                 message: "There was an error adding the product",
             });
+        }
+    };
+
+    const onFileChange = async (e) => {
+        setFile(e.target.files[0]);
+        console.log(e.target.files[0]);
+        const formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        console.log(...formData.entries());
+
+        try {
+            const response = await axios.post(
+                "http://localhost:4000/upload/addItem",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            console.log(response.data);
+
+            setValue("imagesUrl", response.data.imageUrl);
+        } catch (error) {
+            console.error(error.response);
+            console.error("Error uploading file:", error);
         }
     };
 
@@ -80,12 +109,7 @@ export function ProductAddForm() {
                 placeholder="Ilość w magazynie"
             />
             <ErrorMessage error={errors.stockQuantity} />
-            <input
-                className={styles.input}
-                {...register("imagesUrl")}
-                type="text"
-                placeholder="URL obrazu"
-            />
+            <input type="file" onChange={onFileChange} />
             <ErrorMessage error={errors.imagesUrl} />
             <textarea
                 className={`${styles.input} ${styles.textarea}`}

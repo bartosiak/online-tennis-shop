@@ -1,7 +1,3 @@
-button:disabled {
-    cursor: not-allowed;
-}
-
 .header {
     margin-bottom: 1.3rem;
     display: block;

@@ -15,8 +15,6 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage });
-
 const app = express();
 
 app.use("/uploads", express.static("uploads"));
@@ -50,7 +48,7 @@ app.use("/products", productRouter);
 app.use("/order", orderRouter);
 app.use("/customer", customerRouter);
 app.use("/user", userRouter);
-app.use("/uploads", imageRouter);
+app.use("/upload", imageRouter);
 app.use(errorHandler);
 
 app.listen(config.app.port, () => {
