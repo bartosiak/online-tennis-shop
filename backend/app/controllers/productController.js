@@ -1,6 +1,7 @@
 const Product = require("../models/ProductModel");
 const fs = require("fs");
 const path = require("path");
+const Image = require("../models/ImageModel");
 
 module.exports = {
     index: async (req, res, next) => {
@@ -41,14 +42,18 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            const images = fs.readdirSync(path.join(__dirname, "../../public"));
-
-            const randomImage =
-                images[Math.floor(Math.random() * images.length)];
+            let imagePath = "";
+            if (req.file) {
+                const newImage = new Image({
+                    imagePath: "/uploads/" + req.file.originalname,
+                });
+                const savedImage = await newImage.save();
+                imagePath = savedImage.imagePath;
+            }
 
             const newProduct = new Product({
                 ...req.body,
-                imagesUrl: [`http://localhost:4000/${randomImage}`],
+                imagesUrl: [imagePath],
             });
 
             const savedProduct = await newProduct.save();

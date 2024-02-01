@@ -24,7 +24,6 @@ module.exports = {
     },
 
     create: async (req, res, next) => {
-        console.log(req.body);
         try {
             let customer = await Customer.findOne({
                 email: req.body.email,

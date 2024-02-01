@@ -53,7 +53,7 @@ export function ProductEditForm({ productId }) {
     const onSubmit = async (data) => {
         try {
             const token = Cookies.get("jwt");
-            console.log(token);
+
             data.price = Number(data.price);
             data.stockQuantity = Number(data.stockQuantity);
             const response = await axios.put(

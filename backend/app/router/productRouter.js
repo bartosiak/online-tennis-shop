@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/productController");
 const authApiMiddleware = require("../middleware/authApiMiddleware.js");
+const upload = require("../middleware/multerMiddleware.js");
 
 router.get("/", ProductController.index);
 
@@ -9,7 +10,12 @@ router.get("/category/:category", ProductController.category);
 
 router.get("/:id", ProductController.showProduct);
 
-router.post("/", authApiMiddleware, ProductController.create);
+router.post(
+    "/",
+    authApiMiddleware,
+    upload.single("file"),
+    ProductController.create
+);
 
 router.put("/:id", authApiMiddleware, ProductController.update);
 

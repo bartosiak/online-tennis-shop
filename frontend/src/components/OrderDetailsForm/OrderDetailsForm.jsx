@@ -18,7 +18,6 @@ const countries = [
 export async function createOrder(args) {
     const formData = await args.request.formData();
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
 
     return fetch("http://localhost:4000/order", {
         method: "POST",

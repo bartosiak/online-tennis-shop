@@ -7,7 +7,6 @@ module.exports = (req, res, next) => {
         try {
             const decoded = jwt.verify(token, "secretKey");
             req.user = decoded;
-            console.log(decoded);
 
             if (req.user.role !== "admin") {
                 return res.status(403).json({

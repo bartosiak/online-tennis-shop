@@ -6,15 +6,6 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const mongoUrl = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
 
-const storage = multer.diskStorage({
-    destination: function (_req, _file, cb) {
-        cb(null, "uploads");
-    },
-    filename: function (_req, file, cb) {
-        cb(null, file.originalname);
-    },
-});
-
 const app = express();
 
 app.use("/uploads", express.static("uploads"));
@@ -40,7 +31,6 @@ const productRouter = require("./app/router/productRouter");
 const orderRouter = require("./app/router/orderRouter");
 const customerRouter = require("./app/router/customerRouter");
 const userRouter = require("./app/router/userRouter");
-const imageRouter = require("./app/router/imageRouter");
 
 const errorHandler = require("./app/middleware/errorHandler");
 
@@ -48,7 +38,6 @@ app.use("/products", productRouter);
 app.use("/order", orderRouter);
 app.use("/customer", customerRouter);
 app.use("/user", userRouter);
-app.use("/upload", imageRouter);
 app.use(errorHandler);
 
 app.listen(config.app.port, () => {
