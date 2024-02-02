@@ -87,9 +87,18 @@ export function IconMenu() {
                                 </Link>
                             </li>
                             {isLoggedIn && (
-                                <li className={styles.addProduct}>
-                                    <Link to="/add-product">Dodaj produkt</Link>
-                                </li>
+                                <>
+                                    <li className={styles.addProduct}>
+                                        <Link to="/add-product">
+                                            Dodaj produkt
+                                        </Link>
+                                    </li>
+                                    <li className={styles.addProduct}>
+                                        <Link to="/products">
+                                            Lista produktów
+                                        </Link>
+                                    </li>
+                                </>
                             )}
                         </ul>
                     )}

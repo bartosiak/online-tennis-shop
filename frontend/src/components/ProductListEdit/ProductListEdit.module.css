@@ -1,0 +1,17 @@
+.thumbnail {
+    width: 5rem;
+}
+
+.productsTable {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.editButton {
+    width: 2rem;
+}
+
+.thead th:last-child,
+.productsTable td:last-child {
+    width: 1rem; /* lub dowolna inna wartość, która Ci odpowiada */
+}

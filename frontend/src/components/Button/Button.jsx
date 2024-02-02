@@ -1,5 +1,5 @@
 import styles from "./Button.module.css";
-export function Button({ children, onClick, type, disabled }) {
+export function Button({ children, onClick, type, disabled, color }) {
     const handleClick = (e) => {
         if (onClick) {
             onClick(e);
@@ -11,6 +11,7 @@ export function Button({ children, onClick, type, disabled }) {
             disabled={disabled}
             className={styles.button}
             onClick={handleClick}
+            style={{ backgroundColor: color }}
         >
             {children}
         </button>

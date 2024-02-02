@@ -15,6 +15,7 @@ import { Login } from "./views/Login/Login.jsx";
 import { ProductAddPage } from "./views/ProductAddPage/ProductAddPage.jsx";
 import { ProductEditPage } from "./views/ProductEditPage/ProductEditPage.jsx";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.jsx";
+import { ProductListAdmin } from "./views/ProductListAdmin/ProductListAdmin.jsx";
 
 const router = createBrowserRouter([
     {
@@ -76,6 +77,17 @@ const router = createBrowserRouter([
                         <ProductEditPage />
                     </PrivateRoute>
                 ),
+            },
+            {
+                path: "/products",
+                element: (
+                    <PrivateRoute>
+                        <ProductListAdmin />
+                    </PrivateRoute>
+                ),
+                loader: () => {
+                    return fetch("http://localhost:4000/products");
+                },
             },
         ],
     },

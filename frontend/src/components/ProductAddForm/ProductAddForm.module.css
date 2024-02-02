@@ -22,3 +22,9 @@ textarea {
     overflow: auto;
     height: 5rem;
 }
+
+.confirmationMessage {
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1rem;
+}

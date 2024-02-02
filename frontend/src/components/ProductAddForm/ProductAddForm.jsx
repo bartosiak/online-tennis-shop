@@ -113,7 +113,7 @@ export function ProductAddForm() {
                 {isSubmitting ? "Loading..." : "Submit"}
             </Button>
             <ErrorMessage error={errors.root} />
-            {conrifmationMessage && <h4>{conrifmationMessage}</h4>}
+            {conrifmationMessage && <p className={styles.confirmationMessage}>{conrifmationMessage}</p>}
         </form>
     );
 }
