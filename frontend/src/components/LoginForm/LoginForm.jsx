@@ -32,7 +32,7 @@ export function LoginForm() {
                 "http://localhost:4000/user/login",
                 data
             );
-            Cookies.set("jwt", response.data.jwt, { expires: 1 / 24 });
+            Cookies.set("token", response.data.jwt, { expires: 1 / 24 });
 
             navigate("/");
         } catch (error) {

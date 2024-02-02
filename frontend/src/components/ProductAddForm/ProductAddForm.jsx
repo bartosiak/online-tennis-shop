@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 
 export function ProductAddForm() {
     const [file, setFile] = useState(null);
+    const [conrifmationMessage, setConfirmationMessage] = useState("");
     const schema = z.object({
         name: z.string().min(1),
         price: z.string().min(1),
@@ -39,18 +40,13 @@ export function ProductAddForm() {
         }
 
         try {
-            const response = await axios.post(
-                "http://localhost:4000/products",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        Authorization: token,
-                    },
-                }
-            );
-
-            console.log("Product successfully added");
+            await axios.post("http://localhost:4000/products", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: token,
+                },
+            });
+            setConfirmationMessage("Product successfully added");
         } catch (error) {
             setError("root", {
                 message: "There was an error adding the product",
@@ -117,6 +113,7 @@ export function ProductAddForm() {
                 {isSubmitting ? "Loading..." : "Submit"}
             </Button>
             <ErrorMessage error={errors.root} />
+            {conrifmationMessage && <h4>{conrifmationMessage}</h4>}
         </form>
     );
 }

@@ -1,7 +1,6 @@
 const Product = require("../models/ProductModel");
 const fs = require("fs");
 const path = require("path");
-const Image = require("../models/ImageModel");
 
 module.exports = {
     index: async (req, res, next) => {
@@ -42,22 +41,21 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            let imagePath = "";
+            const productData = req.body;
+            const ext = req.file.originalname.substring(
+                req.file.originalname.lastIndexOf("."),
+                req.file.originalname.length
+            );
+            const fileName = req.body.name.toLowerCase().split(" ").join("-");
+
             if (req.file) {
-                const newImage = new Image({
-                    imagePath: "/uploads/" + req.file.originalname,
-                });
-                const savedImage = await newImage.save();
-                imagePath = savedImage.imagePath;
+                productData.imagesUrl = ["uploads/" + fileName + ext];
             }
 
-            const newProduct = new Product({
-                ...req.body,
-                imagesUrl: [imagePath],
-            });
+            const product = new Product(productData);
 
-            const savedProduct = await newProduct.save();
-            return res.status(201).json(savedProduct);
+            await product.save();
+            return res.status(201).json(product);
         } catch (err) {
             return next(err);
         }
@@ -65,11 +63,43 @@ module.exports = {
 
     update: async (req, res, next) => {
         try {
+            // Pobierz produkt, który ma być zaktualizowany
+            const product = await Product.findById(req.params.id);
+    
+            if (req.file) {
+                const ext = req.file.originalname.substring(
+                    req.file.originalname.lastIndexOf("."),
+                    req.file.originalname.length
+                );
+                const fileName = req.body.name
+                    .toLowerCase()
+                    .split(" ")
+                    .join("-");
+                const filePath = path.join(
+                    "uploads",
+                    fileName + ext
+                );
+    
+                // Usuń stary plik
+                if (product.imagesUrl[0]) {
+                    const oldFilePath = path.join(__dirname, "../../", product.imagesUrl[0]);
+                    if (fs.existsSync(oldFilePath)) {
+                        fs.unlinkSync(oldFilePath);
+                        console.log("Stary plik został pomyślnie usunięty.");
+                    }
+                }
+    
+                // Dodaj nowy plik do req.body
+                req.body.imagesUrl = [filePath];
+            }
+    
+            // Zaktualizuj produkt
             const updatedProduct = await Product.findByIdAndUpdate(
                 req.params.id,
                 req.body,
                 { new: true }
             );
+    
             if (!updatedProduct) {
                 return next({ status: 404, message: "Product not found" });
             }
@@ -78,6 +108,7 @@ module.exports = {
             return next(err);
         }
     },
+    
 
     delete: async (req, res, next) => {
         try {

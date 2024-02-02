@@ -5,10 +5,11 @@ import { z } from "zod";
 import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 import { Button } from "../Button/Button";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 export function ProductEditForm({ productId }) {
+    const [file, setFile] = useState(null);
     const schema = z.object({
         name: z.string().min(1),
         price: z.number().min(1),
@@ -16,7 +17,6 @@ export function ProductEditForm({ productId }) {
         category: z.string().min(1),
         brand: z.string(),
         stockQuantity: z.number().min(1),
-        imagesUrl: z.array(z.string().url()),
     });
 
     const {
@@ -52,21 +52,29 @@ export function ProductEditForm({ productId }) {
 
     const onSubmit = async (data) => {
         try {
-            const token = Cookies.get("jwt");
+            const token = Cookies.get("token");
 
-            data.price = Number(data.price);
-            data.stockQuantity = Number(data.stockQuantity);
-            const response = await axios.put(
+            const formData = new FormData();
+
+            Object.keys(data).forEach((key) => {
+                formData.append(key, data[key]);
+            });
+
+            if (file) {
+                formData.append("file", file);
+            }
+
+            await axios.put(
                 `http://localhost:4000/products/${productId}`,
-                data,
+                formData,
                 {
                     headers: {
+                        "Content-Type": "multipart/form-data",
                         Authorization: token,
                     },
                 }
             );
 
-            console.log(response);
             console.log("Product successfully updated");
         } catch (error) {
             setError("root", {
@@ -119,10 +127,11 @@ export function ProductEditForm({ productId }) {
             <ErrorMessage error={errors.stockQuantity} />
 
             <input
-                className={styles.input}
                 {...register("imagesUrl")}
-                type="text"
-                placeholder="URL obrazu"
+                type="file"
+                onChange={(e) => {
+                    setFile(e.target.files[0]);
+                }}
             />
             <ErrorMessage error={errors.imagesUrl} />
 

@@ -1,4 +1,4 @@
-import styles from "./Product.module.css";
+import styles from "./Products.module.css";
 import { CenteredContent } from "../CenteredContent/CenteredContent";
 import { Product } from "../Product/Product";
 

@@ -30,13 +30,18 @@ export function IconMenu() {
     }, []);
 
     useEffect(() => {
-        const token = Cookies.get("jwt");
+        const token = Cookies.get("token");
         if (token) {
             setIsLoggedIn(true);
         } else {
             setIsLoggedIn(false);
         }
     }, [isOpen]);
+
+    function handleLogoutClick() {
+        Cookies.remove("token");
+        setIsOpen(false);
+    }
 
     return (
         <div>
@@ -52,12 +57,22 @@ export function IconMenu() {
                         <ul ref={node} className={styles.accordion}>
                             <li>
                                 <Button>
-                                    <Link
-                                        className={styles.btnLogin}
-                                        to="/login"
-                                    >
-                                        Zaloguj
-                                    </Link>
+                                    {isLoggedIn ? (
+                                        <Link
+                                            className={styles.btnLogin}
+                                            to="/"
+                                            onClick={handleLogoutClick}
+                                        >
+                                            Wyloguj
+                                        </Link>
+                                    ) : (
+                                        <Link
+                                            className={styles.btnLogin}
+                                            to="/login"
+                                        >
+                                            Zaloguj
+                                        </Link>
+                                    )}
                                 </Button>
                             </li>
                             <li>

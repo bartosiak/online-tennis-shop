@@ -19,7 +19,7 @@ export const PrivateRoute = ({ children }) => {
     }, [isAuth, navigate, userRole]);
 
     if (!isAuth || userRole === "customer") {
-        return null;
+        return navigate("/");
     }
 
     return children;

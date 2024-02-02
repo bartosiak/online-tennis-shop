@@ -17,7 +17,12 @@ router.post(
     ProductController.create
 );
 
-router.put("/:id", authApiMiddleware, ProductController.update);
+router.put(
+    "/:id",
+    authApiMiddleware,
+    upload.single("file"),
+    ProductController.update
+);
 
 router.delete("/:id", authApiMiddleware, ProductController.delete);
 
