@@ -1,59 +1,59 @@
 .container {
     margin-bottom: 3rem;
-    width: 100%;
+    width: 80%;
 }
-.wrapper {
-    margin-inline: auto;
-    background-color: #f8f6f6;
-}
-.table {
+
+.tableCardProduct {
     width: 100%;
     border-spacing: 0;
 }
+.total,
+.empty,
+.brand,
+.quantity,
+.price {
+    padding: 1rem;
+    text-align: right;
+}
 
-.tableHead {
-    padding-right: 5rem;
+.price {
+    width: 15%;
 }
 
 .holder {
     background-color: #f8f6f6;
-    padding: 1rem;
+    padding: 1.5rem;
     border: 1px solid rgb(179, 179, 179);
 }
-.product {
-    border-top: 1px solid rgb(179, 179, 179);
-}
 
-td {
-    border-top: 1px solid rgb(179, 179, 179);
+.totalPrice {
+    padding-right: 3rem;
     text-align: right;
 }
 
-caption,
-th,
-td {
-    padding: 1rem;
+.td,
+.summary,
+.totalCost {
+    border-top: 1px solid var(--color-theme-main);
+    border-spacing: 0;
+    padding-top: 1.5rem;
+    font-weight: bold;
 }
 
-th {
-    text-align: right;
-}
-.content caption {
+.caption {
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
     text-align: left;
     margin-bottom: 2rem;
+    padding: 1rem;
 }
 
-th:nth-child(4) {
-    width: 18%;
-}
-th:last-child {
-    padding-right: 5rem;
-    width: 18%;
+.summary {
+    text-align: right;
 }
 
 .totalCost {
-    padding-right: 5rem;
+    text-align: right;
+    padding-right: 3rem;
 }

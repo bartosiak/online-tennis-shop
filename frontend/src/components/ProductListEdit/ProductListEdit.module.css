@@ -1,17 +1,38 @@
 .thumbnail {
-    width: 5rem;
+    width: 4rem;
 }
 
 .productsTable {
     width: 100%;
     border-spacing: 0;
+    padding: 0;
 }
 
-.editButton {
-    width: 2rem;
+.productsTable td {
+    padding: 0.4rem;
 }
 
-.thead th:last-child,
-.productsTable td:last-child {
-    width: 1rem; /* lub dowolna inna wartość, która Ci odpowiada */
+.thead th:nth-child(5),
+.productsTable td:nth-child(5) {
+    width: 20%;
+    padding-right: 5rem;
+}
+
+.tableheight {
+    height: 2rem;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1.5rem;
+    width: 15rem;
+}
+
+.theadAction {
+    padding: 0;
+    margin: 0;
+}
+
+.thead th:last-child {
+    padding-right: 1rem;
 }

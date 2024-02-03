@@ -14,15 +14,17 @@ export function CartProductList({ products }) {
             <CenteredContent>
                 <div className={styles.wrapper}>
                     <div className={styles.holder}>
-                        <table className={styles.table}>
-                            <caption>Koszyk</caption>
+                        <table className={styles.tableCardProduct}>
+                            <caption className={styles.caption}>Koszyk</caption>
                             <thead>
                                 <tr className={styles.tableHead}>
-                                    <th></th>
-                                    <th>Marka</th>
-                                    <th>Ilość</th>
-                                    <th>Cena za jednostkę</th>
-                                    <th>Suma</th>
+                                    <th className={styles.empty}></th>
+                                    <th className={styles.brand}>Marka</th>
+                                    <th className={styles.quantity}>Ilość</th>
+                                    <th className={styles.price}>
+                                        Cena za szt.
+                                    </th>
+                                    <th className={styles.totalPrice}>Suma</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,10 +35,10 @@ export function CartProductList({ products }) {
                                     />
                                 ))}
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>Suma:</td>
+                                    <td className={styles.td}></td>
+                                    <td className={styles.td}></td>
+                                    <td className={styles.td}></td>
+                                    <td className={styles.summary}>Suma:</td>
                                     <td className={styles.totalCost}>{sum}</td>
                                 </tr>
                             </tbody>
