@@ -18,12 +18,16 @@
     border: 1px solid gray;
 }
 
+.inputQuanty {
+    width: 3rem;
+    height: 2rem;
+    font-size: 1.2rem;
+}
+
 .total {
     padding-right: 2rem;
 }
 
-.wrapperBtn {
-}
 .btn {
     margin: auto;
     font-weight: bold;

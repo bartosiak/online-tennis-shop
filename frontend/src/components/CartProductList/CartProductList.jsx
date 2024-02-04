@@ -3,7 +3,7 @@ import { CartProduct } from "../CartProduct/CartProduct";
 import { CenteredContent } from "../CenteredContent/CenteredContent";
 import styles from "./CartProductList.module.css";
 
-export function CartProductList({ products, handleDelete }) {
+export function CartProductList({ products, handleDelete, updateQuantity }) {
     console.log(handleDelete);
     let sum = 0;
     products.forEach((product) => {
@@ -34,6 +34,7 @@ export function CartProductList({ products, handleDelete }) {
                                         key={product._id}
                                         product={product}
                                         handleDelete={handleDelete}
+                                        updateQuantity={updateQuantity}
                                     />
                                 ))}
                                 <tr>
@@ -41,7 +42,9 @@ export function CartProductList({ products, handleDelete }) {
                                     <td className={styles.td}></td>
                                     <td className={styles.td}></td>
                                     <td className={styles.summary}>Suma:</td>
-                                    <td className={styles.totalCost}>{sum}</td>
+                                    <td className={styles.totalCost}>
+                                        {sum} zł
+                                    </td>
                                     <td className={styles.td}></td>
                                 </tr>
                             </tbody>

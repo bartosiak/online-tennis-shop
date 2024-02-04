@@ -47,10 +47,29 @@ export function Layout() {
         });
     }
 
+    function updateProductQuantity(id, newQuantity) {
+        setCartItems((previousCartItems) => {
+            const newState = previousCartItems.map((item) => {
+                if (item._id === id) {
+                    return { ...item, quantity: Number(newQuantity) };
+                } else {
+                    return item;
+                }
+            });
+            localStorage["cart_products"] = JSON.stringify(newState);
+            return newState;
+        });
+    }
+
     return (
         <>
             <CartContext.Provider
-                value={[cartItems, removeProductFromCart, addProductToCart]}
+                value={[
+                    cartItems,
+                    removeProductFromCart,
+                    updateProductQuantity,
+                    addProductToCart,
+                ]}
             >
                 <MainContent>
                     <TopBar>
