@@ -36,9 +36,22 @@ export function Layout() {
             }
         });
     }
+
+    function removeProductFromCart(id) {
+        setCartItems((previousCartItems) => {
+            const newState = previousCartItems.filter(
+                (item) => item._id !== id
+            );
+            localStorage["cart_products"] = JSON.stringify(newState);
+            return newState;
+        });
+    }
+
     return (
         <>
-            <CartContext.Provider value={[cartItems, addProductToCart]}>
+            <CartContext.Provider
+                value={[cartItems, removeProductFromCart, addProductToCart]}
+            >
                 <MainContent>
                     <TopBar>
                         <MainMenu />

@@ -3,7 +3,8 @@ import { CartProduct } from "../CartProduct/CartProduct";
 import { CenteredContent } from "../CenteredContent/CenteredContent";
 import styles from "./CartProductList.module.css";
 
-export function CartProductList({ products }) {
+export function CartProductList({ products, handleDelete }) {
+    console.log(handleDelete);
     let sum = 0;
     products.forEach((product) => {
         sum += product.price * product.quantity;
@@ -32,6 +33,7 @@ export function CartProductList({ products }) {
                                     <CartProduct
                                         key={product._id}
                                         product={product}
+                                        handleDelete={handleDelete}
                                     />
                                 ))}
                                 <tr>
@@ -40,6 +42,7 @@ export function CartProductList({ products }) {
                                     <td className={styles.td}></td>
                                     <td className={styles.summary}>Suma:</td>
                                     <td className={styles.totalCost}>{sum}</td>
+                                    <td className={styles.td}></td>
                                 </tr>
                             </tbody>
                         </table>

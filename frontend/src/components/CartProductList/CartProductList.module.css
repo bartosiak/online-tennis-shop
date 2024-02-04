@@ -27,7 +27,7 @@
 }
 
 .totalPrice {
-    padding-right: 3rem;
+    padding-right: 2rem;
     text-align: right;
 }
 
@@ -55,5 +55,5 @@
 
 .totalCost {
     text-align: right;
-    padding-right: 3rem;
+    padding-right: 2rem;
 }

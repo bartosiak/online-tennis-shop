@@ -2,7 +2,8 @@
 .brand,
 .quanty,
 .price,
-.total {
+.total,
+.wrapperBtn {
     padding: 1rem;
     border-top: 1px solid rgb(179, 179, 179);
     text-align: right;
@@ -18,5 +19,13 @@
 }
 
 .total {
-    padding-right: 3rem;
+    padding-right: 2rem;
+}
+
+.wrapperBtn {
+}
+.btn {
+    margin: auto;
+    font-weight: bold;
+    padding: 0.4rem;
 }

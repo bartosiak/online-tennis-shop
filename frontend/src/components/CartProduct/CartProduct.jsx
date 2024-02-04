@@ -1,5 +1,5 @@
 import styles from "./CartProduct.module.css";
-export function CartProduct({ product }) {
+export function CartProduct({ product, handleDelete }) {
     return (
         <tr>
             <td className={styles.name}>
@@ -9,6 +9,14 @@ export function CartProduct({ product }) {
             <td className={styles.quanty}>{product.quantity}</td>
             <td className={styles.price}>{product.price}</td>
             <td className={styles.total}>{product.price * product.quantity}</td>
+            <td className={styles.wrapperBtn}>
+                <button
+                    className={styles.btn}
+                    onClick={() => handleDelete(product._id)}
+                >
+                    X
+                </button>
+            </td>
         </tr>
     );
 }
