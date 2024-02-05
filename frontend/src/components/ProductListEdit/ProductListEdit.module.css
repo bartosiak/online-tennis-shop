@@ -2,20 +2,14 @@
     width: 4rem;
 }
 
+.productHeader {
+    margin: 2rem 0;
+}
+
 .productsTable {
     width: 100%;
     border-spacing: 0;
     padding: 0;
-}
-
-.productsTable td {
-    padding: 0.4rem;
-}
-
-.thead th:nth-child(5),
-.productsTable td:nth-child(5) {
-    width: 20%;
-    padding-right: 5rem;
 }
 
 .tableheight {
@@ -25,14 +19,31 @@
 .buttonGroup {
     display: flex;
     gap: 1.5rem;
-    width: 15rem;
+    justify-content: flex-end;
+    min-width: 10rem;
 }
 
-.theadAction {
-    padding: 0;
+.stockQuantity {
+    width: 8rem;
+    padding-right: 2rem;
+}
+
+.actionBody {
+    max-width: 9rem;
+}
+
+.btnEdit {
+    color: white;
+}
+
+.th {
+    padding: 1rem;
     margin: 0;
+    text-align: right;
 }
 
-.thead th:last-child {
-    padding-right: 1rem;
+.td {
+    text-align: right;
+    border-top: 1px solid rgb(179, 179, 179);
+    padding: 1rem;
 }

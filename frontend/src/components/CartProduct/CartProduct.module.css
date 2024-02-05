@@ -19,13 +19,14 @@
 }
 
 .inputQuanty {
-    width: 3rem;
+    width: 3.2rem;
     height: 2rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .total {
     padding-right: 2rem;
+    width: 7rem;
 }
 
 .btn {

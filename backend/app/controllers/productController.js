@@ -63,9 +63,8 @@ module.exports = {
 
     update: async (req, res, next) => {
         try {
-            // Pobierz produkt, który ma być zaktualizowany
             const product = await Product.findById(req.params.id);
-    
+
             if (req.file) {
                 const ext = req.file.originalname.substring(
                     req.file.originalname.lastIndexOf("."),
@@ -75,31 +74,29 @@ module.exports = {
                     .toLowerCase()
                     .split(" ")
                     .join("-");
-                const filePath = path.join(
-                    "uploads",
-                    fileName + ext
-                );
-    
-                // Usuń stary plik
+                const filePath = path.join("uploads", fileName + ext);
+
                 if (product.imagesUrl[0]) {
-                    const oldFilePath = path.join(__dirname, "../../", product.imagesUrl[0]);
+                    const oldFilePath = path.join(
+                        __dirname,
+                        "../../",
+                        product.imagesUrl[0]
+                    );
                     if (fs.existsSync(oldFilePath)) {
                         fs.unlinkSync(oldFilePath);
                         console.log("Stary plik został pomyślnie usunięty.");
                     }
                 }
-    
-                // Dodaj nowy plik do req.body
+
                 req.body.imagesUrl = [filePath];
             }
-    
-            // Zaktualizuj produkt
+
             const updatedProduct = await Product.findByIdAndUpdate(
                 req.params.id,
                 req.body,
                 { new: true }
             );
-    
+
             if (!updatedProduct) {
                 return next({ status: 404, message: "Product not found" });
             }
@@ -108,13 +105,32 @@ module.exports = {
             return next(err);
         }
     },
-    
 
     delete: async (req, res, next) => {
         try {
             const deletedProduct = await Product.findByIdAndDelete(
                 req.params.id
             );
+            const imageNames = deletedProduct.imagesUrl;
+
+            imageNames.forEach((imageName) => {
+                const imagePath = path.join(__dirname, "../../", imageName);
+                console.log(imagePath);
+                if (fs.existsSync(imagePath)) {
+                    console.log(imagePath);
+                    fs.unlink(imagePath, (err) => {
+                        if (err) {
+                            console.error(err);
+                            return res.status(500).send({
+                                message: "Błąd podczas usuwania pliku",
+                            });
+                        }
+                    });
+                } else {
+                    console.log("Plik nie istnieje");
+                }
+            });
+
             if (!deletedProduct) {
                 return next({ status: 404, message: "Product not found" });
             }

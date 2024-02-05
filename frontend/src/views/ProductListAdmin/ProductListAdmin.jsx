@@ -6,7 +6,7 @@ export function ProductListAdmin() {
     const products = useLoaderData();
     return (
         <CenteredContent width={"100"}>
-            <ProductListEdit products={products} />
+            <ProductListEdit initialProducts={products} />
         </CenteredContent>
     );
 }

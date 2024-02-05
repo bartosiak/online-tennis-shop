@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
 
 export const PrivateRoute = ({ children }) => {
     const token = Cookies.get("token");
@@ -18,9 +18,5 @@ export const PrivateRoute = ({ children }) => {
         }
     }, [isAuth, navigate, userRole]);
 
-    if (!isAuth || userRole === "customer") {
-        return navigate("/");
-    }
-
-    return children;
+    return !isAuth || userRole === "customer" ? <></> : children;
 };
