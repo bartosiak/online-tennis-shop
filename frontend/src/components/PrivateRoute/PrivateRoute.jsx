@@ -4,19 +4,31 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 
 export const PrivateRoute = ({ children }) => {
-    const token = Cookies.get("token");
-    const decodedToken = jwtDecode(token);
-    const userRole = decodedToken.role;
-    const isAuth = !!token;
     const navigate = useNavigate();
+    const token = Cookies.get("token");
 
     useEffect(() => {
-        if (!isAuth) {
+        if (!token) {
             navigate("/login");
-        } else if (userRole === "customer") {
-            navigate("/");
-        }
-    }, [isAuth, navigate, userRole]);
+        } else {
+            try {
+                const decodedToken = jwtDecode(token);
+                const userRole = decodedToken.role;
 
-    return !isAuth || userRole === "customer" ? <></> : children;
+                if (userRole === "customer") {
+                    navigate("/");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Nieprawidłowy token. Zaloguj się ponownie.");
+                navigate("/login");
+            }
+        }
+    }, [token, navigate]);
+
+    return !token || (token && jwtDecode(token)?.role === "customer") ? (
+        <></>
+    ) : (
+        children
+    );
 };

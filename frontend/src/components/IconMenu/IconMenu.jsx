@@ -7,6 +7,7 @@ import USER from "../../assets/user.svg";
 import { CartContext } from "../../contexts/CartContext";
 import Cookies from "js-cookie";
 import { Button } from "../Button/Button";
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 
 export function IconMenu() {
     const [cartItems] = useContext(CartContext);
@@ -31,6 +32,7 @@ export function IconMenu() {
 
     useEffect(() => {
         const token = Cookies.get("token");
+
         if (token) {
             setIsLoggedIn(true);
         } else {
@@ -76,17 +78,23 @@ export function IconMenu() {
                                 </Button>
                             </li>
                             <li>
-                                <Link
-                                    className={styles.registration}
-                                    to="/registration"
-                                >
-                                    lub{" "}
-                                    <span className={styles.registrationSpan}>
-                                        zarejestruj się
-                                    </span>
-                                </Link>
+                                {isLoggedIn ? (
+                                    <></>
+                                ) : (
+                                    <Link
+                                        className={styles.registration}
+                                        to="/registration"
+                                    >
+                                        lub{" "}
+                                        <span
+                                            className={styles.registrationSpan}
+                                        >
+                                            zarejestruj się
+                                        </span>
+                                    </Link>
+                                )}
                             </li>
-                            {isLoggedIn && (
+                            <PrivateRoute>
                                 <>
                                     <li className={styles.addProduct}>
                                         <Link to="/add-product">
@@ -99,7 +107,7 @@ export function IconMenu() {
                                         </Link>
                                     </li>
                                 </>
-                            )}
+                            </PrivateRoute>
                         </ul>
                     )}
                 </li>
