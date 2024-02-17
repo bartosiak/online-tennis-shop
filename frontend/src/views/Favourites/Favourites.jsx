@@ -1,7 +1,7 @@
 import { FlexContainer } from "../../components/FlexContainer/FlexContainer";
-import { FavouritesList } from "../../components/FavoritesList/FavoritesList";
+import { FavouritesList } from "../../components/FavouritesList/FavouritesList";
 
-export function OrderDetails() {
+export function Favourites() {
     const favouriteProducts = [
         {
             id: 1,

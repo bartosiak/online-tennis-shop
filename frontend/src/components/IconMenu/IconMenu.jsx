@@ -112,7 +112,7 @@ export function IconMenu() {
                     )}
                 </li>
                 <li>
-                    <Link to="/favorite">
+                    <Link to="/favourites">
                         <img src={HEART} alt="" />
                     </Link>
                 </li>

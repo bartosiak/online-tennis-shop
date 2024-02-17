@@ -16,6 +16,7 @@ import { ProductAddPage } from "./views/ProductAddPage/ProductAddPage.jsx";
 import { ProductEditPage } from "./views/ProductEditPage/ProductEditPage.jsx";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.jsx";
 import { ProductListAdmin } from "./views/ProductListAdmin/ProductListAdmin.jsx";
+import { Favourites } from "./views/Favourites/Favourites.jsx";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
                 path: "/order-details",
                 action: createOrder,
                 element: <OrderDetails />,
+            },
+            {
+                path: "/favourites",
+                element: <Favourites />,
             },
             {
                 path: "/registration",
