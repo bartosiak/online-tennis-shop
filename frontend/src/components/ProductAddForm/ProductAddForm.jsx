@@ -9,7 +9,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 export function ProductAddForm() {
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
     const [conrifmationMessage, setConfirmationMessage] = useState("");
     const schema = z.object({
         name: z.string().min(1),
@@ -32,14 +32,22 @@ export function ProductAddForm() {
     const onSubmit = async (data) => {
         const token = Cookies.get("token");
         const formData = new FormData();
-        Object.keys(data).forEach((key) => {
+
+        Object.keys(data).map((key) => {
             formData.append(key, data[key]);
         });
-        if (file) {
-            formData.append("file", file);
+
+        if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+                formData.append("files", files[i]);
+            }
         }
 
         try {
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ", " + pair[1]);
+            }
+
             await axios.post("http://localhost:4000/products", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -53,6 +61,7 @@ export function ProductAddForm() {
             });
         }
     };
+    console.log();
 
     return (
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -95,8 +104,10 @@ export function ProductAddForm() {
             <input
                 {...register("imagesUrl")}
                 type="file"
+                name="files"
+                multiple
                 onChange={(e) => {
-                    setFile(e.target.files[0]);
+                    setFiles(e.target.files);
                 }}
             />
 
@@ -113,7 +124,11 @@ export function ProductAddForm() {
                 {isSubmitting ? "Loading..." : "Submit"}
             </Button>
             <ErrorMessage error={errors.root} />
-            {conrifmationMessage && <p className={styles.confirmationMessage}>{conrifmationMessage}</p>}
+            {conrifmationMessage && (
+                <p className={styles.confirmationMessage}>
+                    {conrifmationMessage}
+                </p>
+            )}
         </form>
     );
 }

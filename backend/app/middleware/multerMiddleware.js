@@ -1,20 +1,29 @@
 const multer = require("multer");
+const fs = require("fs");
+let fileCount = 0;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads/");
+        const productFolder = `uploads/${req.body.name}`;
+
+        if (!fs.existsSync(productFolder)) {
+            fs.mkdirSync(productFolder);
+        }
+
+        cb(null, productFolder);
     },
 
     filename: function (req, file, cb) {
-        const ext = file.originalname.substring(
-            file.originalname.lastIndexOf("."),
-            file.originalname.length
-        );
-        const fileName = req.body.name.toLowerCase().split(" ").join("-");
-        cb(null, fileName + ext);
+        const originalName = file.originalname
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+        const name = `${fileCount}-${file.originalname}`;
+        fileCount++;
+
+        cb(null, name);
     },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 module.exports = upload;

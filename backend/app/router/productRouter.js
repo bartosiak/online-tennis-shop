@@ -13,7 +13,7 @@ router.get("/:id", ProductController.showProduct);
 router.post(
     "/",
     authApiMiddleware,
-    upload.single("file"),
+    upload.array("files", 12),
     ProductController.create
 );
 

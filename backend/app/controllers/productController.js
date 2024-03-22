@@ -42,22 +42,19 @@ module.exports = {
     create: async (req, res, next) => {
         try {
             const productData = req.body;
-            const ext = req.file.originalname.substring(
-                req.file.originalname.lastIndexOf("."),
-                req.file.originalname.length
-            );
-            const fileName = req.body.name.toLowerCase().split(" ").join("-");
 
-            if (req.file) {
-                productData.imagesUrl = ["uploads/" + fileName + ext];
+            if (req.files) {
+                const imagePaths = req.files.map((file) => file.path);
+                productData.imagesUrl = imagePaths;
             }
 
             const product = new Product(productData);
 
             await product.save();
+
             return res.status(201).json(product);
-        } catch (err) {
-            return next(err);
+        } catch (error) {
+            return next(error);
         }
     },
 
