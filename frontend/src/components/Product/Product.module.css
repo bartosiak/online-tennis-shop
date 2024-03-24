@@ -17,6 +17,10 @@
     margin-bottom: 1rem;
 }
 
+.product button {
+    border: none;
+}
+
 .heart {
     position: absolute;
     top: 0.5rem;

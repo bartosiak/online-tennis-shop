@@ -17,8 +17,13 @@ import { ProductEditPage } from "./views/ProductEditPage/ProductEditPage.jsx";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.jsx";
 import { ProductListAdmin } from "./views/ProductListAdmin/ProductListAdmin.jsx";
 import { Favourites } from "./views/Favourites/Favourites.jsx";
+import { addProductToFavourites } from "./api/addProductToFavouritesAction.js";
 
 const router = createBrowserRouter([
+    {
+        path: "/add-to-favourites/:id",
+        action: addProductToFavourites,
+    },
     {
         path: "/",
         element: <Layout />,
