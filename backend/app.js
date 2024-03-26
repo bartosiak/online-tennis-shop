@@ -28,6 +28,7 @@ const productRouter = require("./app/router/productRouter");
 const orderRouter = require("./app/router/orderRouter");
 const customerRouter = require("./app/router/customerRouter");
 const userRouter = require("./app/router/userRouter");
+const favoriteRouter = require("./app/router/favoriteRouter");
 
 const errorHandler = require("./app/middleware/errorHandler");
 
@@ -35,6 +36,7 @@ app.use("/products", productRouter);
 app.use("/order", orderRouter);
 app.use("/customer", customerRouter);
 app.use("/user", userRouter);
+app.use("/favorite", favoriteRouter);
 app.use(errorHandler);
 
 app.listen(config.app.port, () => {
