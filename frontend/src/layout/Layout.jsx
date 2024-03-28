@@ -6,9 +6,13 @@ import { MainContent } from "../components/MainContent/MainContent";
 import { MainMenu } from "../components/MainMenu/MainMenu";
 import { TopBar } from "../components/TopBar/TopBar";
 import { CartContext } from "../contexts/CartContext";
+import { FavouritesContextProvider } from "../contexts/FavouritesContextProvider";
 import { useState } from "react";
+import { useUser } from "../custom/useUser";
 
 export function Layout() {
+    const { userId } = useUser();
+
     const [cartItems, setCartItems] = useState(() => {
         return localStorage["cart_products"]
             ? JSON.parse(localStorage["cart_products"])
@@ -71,15 +75,17 @@ export function Layout() {
                     addProductToCart,
                 ]}
             >
-                <MainContent>
-                    <TopBar>
-                        <MainMenu />
-                        <Logo />
-                        <IconMenu />
-                    </TopBar>
-                    <Outlet />
-                </MainContent>
-                <Footer />
+                <FavouritesContextProvider userId={userId}>
+                    <MainContent>
+                        <TopBar>
+                            <MainMenu />
+                            <Logo />
+                            <IconMenu />
+                        </TopBar>
+                        <Outlet />
+                    </MainContent>
+                    <Footer />
+                </FavouritesContextProvider>
             </CartContext.Provider>
         </>
     );

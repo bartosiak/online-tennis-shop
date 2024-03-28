@@ -23,6 +23,9 @@ const router = createBrowserRouter([
     {
         path: "/add-to-favourites/:id",
         action: addProductToFavourites,
+        loader: () => {
+            return fetch("http://localhost:4000/products");
+        },
     },
     {
         path: "/",

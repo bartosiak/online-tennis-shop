@@ -1,5 +1,5 @@
-const Favorite = require("../models/Favorite");
-const Customer = require("../models/Customer");
+const Favorite = require("../models/FavoriteModel");
+const Customer = require("../models/CustomerModel");
 
 module.exports = {
     index: async (req, res, next) => {
